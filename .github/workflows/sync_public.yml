@@ -1,0 +1,99 @@
+name: Sincronizar archivos con repositorio público
+
+on:
+  push:
+    branches:
+      - release # Este workflow se activa cuando hay un push a la rama 'release'
+
+jobs:
+  sync_files:
+    runs-on: ubuntu-latest
+    env:
+      # Modifica el directorio para que apunte a tu repositorio público
+      PUBLIC_REPO_DIR: AlgoritmosIntro20261C
+
+    permissions:
+      contents: write # Permiso necesario para escribir en el repo público
+
+    steps:
+      - name: Verificar token de acceso
+        run: |
+          if [ -z "${{ secrets.GH_ACTIONS_SYNC_PUBLIC_ALGORITMOS }}" ]; then
+            echo "❌ Error: Token no configurado. Asegúrate de añadir GH_ACTIONS_SYNC_PUBLIC_ALGORITMOS en los secretos del repositorio."
+            exit 1
+          fi
+
+      - name: Checkout del repositorio privado (rama 'release')
+        uses: actions/checkout@v4
+        with:
+          ref: release # Clonamos la rama 'release' del repositorio privado
+
+      - name: Checkout del repositorio público (${{ env.PUBLIC_REPO_DIR }})
+        uses: actions/checkout@v4
+        with:
+          repository: CreadorSW/${{ env.PUBLIC_REPO_DIR }}
+          token: ${{ secrets.GH_ACTIONS_SYNC_PUBLIC_ALGORITMOS }}
+          path: ${{ env.PUBLIC_REPO_DIR }} # Clonamos el repo público en esta carpeta
+      
+      - name: Sincronizar archivos con rsync
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y rsync
+
+          source_dir=$GITHUB_WORKSPACE
+          destination_dir=$GITHUB_WORKSPACE/${{ env.PUBLIC_REPO_DIR }}
+
+          # rsync con la lógica de inclusión/exclusión. Las inclusiones deben ir antes que las exclusiones.
+          rsync -av --delete \
+            --include='*.pdf' \
+            --include='*.ipynb' \
+            --include='*.csv' \
+            --include='*.xlsx'\
+            --include='*.gbs' \
+            --include='README.md' \
+            --exclude='*eval*.csv' \
+            --exclude='*eval*.xlsx' \
+            --exclude='*eval*.gbs' \
+            --exclude='*eval*.pdf' \
+            --exclude='*eval*.ipynb' \
+            --exclude='*' \
+            "$source_dir/" \
+            "$destination_dir/"
+      
+      - name: Configurar Git
+        working-directory: ${{ env.PUBLIC_REPO_DIR }}
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Listar contenido del repo público (antes del commit)
+        working-directory: ${{ env.PUBLIC_REPO_DIR }}
+        run: ls -al .
+
+      - name: Commit y Push de cambios al repositorio público
+        working-directory: ${{ env.PUBLIC_REPO_DIR }}
+        run: |
+          echo "Añadiendo archivos al staging..."
+          git add --all
+
+          echo "Verificando si hay cambios para commitear..."
+          if git diff --staged --quiet; then
+            echo "No hay cambios detectados. No se necesita commit."
+            exit 0
+          fi
+
+          echo "Commiteando cambios..."
+          git commit -m "Sincronización automática desde repositorio privado"
+
+          echo "Trayendo cambios del repositorio público..."
+          git pull origin master --rebase || {
+            echo "❌ Falló el rebase. Intentando merge...";
+            git pull origin master --no-rebase;
+          }
+
+          echo "Empujando contenido de release a master del repo público..."
+          git push origin HEAD:master
+
+      - name: Limpiar workspace
+        if: always()
+        run: rm -rf "${{ env.PUBLIC_REPO_DIR }}"
