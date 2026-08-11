@@ -1,0 +1,76 @@
+program{
+
+    //DibujarCuadradoRojoDeLado3()
+    DibujarDosCuadradosRojosDeLado3()
+}
+
+
+// Estrategia top-dow: codeo desde "lo más grande a lo más chico"
+
+procedure DibujarDosCuadradosRojosDeLado3(){
+    /*
+    PROPÓSITO: Forma 2 cuadrados de lado 3 con bolitas rojas, uno en cada esquina inferior del tablero.
+    PRECONDICIONES: El tablero tiene que ser de al  menos 6x3 (columnasxfilas) y el cabezal estar en la celda (0,0).
+    
+    */
+    
+    DibujarCuadradoRojoDeLado3()
+    PosicionarCabezalParaDibujarAlSurEste()
+    DibujarCuadradoRojoDeLado3()
+}
+
+
+procedure DibujarCuadradoRojoDeLado3(){
+
+    /*
+    PROPÓSITO: Dibuja un cuadrado de lado 3 con bolitas rojas dejando el cabezal en la posición original.
+    PRECONDICIONES:  Debe haber al menos 2 celdas al Norte del cabezal y 2 celdas al Este.
+    */
+    
+    repeat(2){
+        DibujarFilaRojaDeLado3()
+        Mover(Norte)
+    }
+    DibujarFilaRojaDeLado3()//caso borde
+    
+    IrAlBorde(Sur)
+
+}
+
+procedure PosicionarCabezalParaDibujarAlSurEste(){
+    /*
+    PROPÓSITO: Posiciona el cabezal para que se pueda dibujar un cuadrado de lado 3 y el mismo quede posicionado en la esquina sureste.
+    PRECONDICIONES: El tablero tien que medir al  menos 3x3.
+    */
+    
+    IrAlBorde(Este)
+    repeat(2){
+        Mover(Oeste)
+        
+    }    
+    
+}
+
+procedure DibujarFilaRojaDeLado3(){
+    
+    /*
+    PROPÓSITO: Dibuja una fila de bolitas Rojas de longitud 3 de Oeste a Este dejando el cabezal en la posición original.
+    PRECONDICIONES: Debe haber al menos 2 celdas al Este del cabezal.
+    */
+    
+    repeat(2){
+        Poner(Rojo)
+        Mover(Este)
+    }
+    Poner(Rojo) // caso borde
+    repeat(2){
+        Mover(Oeste)
+    }
+    
+}    
+    
+    
+    
+    
+
+
