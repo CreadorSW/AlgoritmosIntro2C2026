@@ -1,0 +1,43 @@
+program{
+    DibujarCuadradoDeColor_DeLado3(Azul)
+}
+
+procedure DibujarCuadradoDeColor_DeLado3(color){
+
+    /*
+    PROPÓSITO: Dibuja un cuadrado de lado 3 con bolitas de color *color* dejando el cabezal en la posición original comenzando en la esquina SO.
+    PRECONDICIONES:  Debe haber al menos 2 celdas al Norte del cabezal y 2 celdas al Este.
+    PARÁMETROS:
+        - color. Color. El color del cual se ponen las bolitas.
+    */
+    
+    repeat(2){
+        DibujarFilaDeColor_DeLado3(color)
+        Mover(Norte)
+    }
+    DibujarFilaDeColor_DeLado3(color)//caso borde
+    
+    IrAlBorde(Sur)
+
+}
+
+
+procedure DibujarFilaDeColor_DeLado3(color){
+    
+    /*
+    PROPÓSITO: Dibuja una fila de bolitas de color *color* de longitud 3 de Oeste a Este dejando el cabezal en la posición original.
+    PRECONDICIONES: Debe haber al menos 2 celdas al Este del cabezal.
+    PARÁMETROS:
+        - color. Color. El color del cual se ponen las bolitas.
+    */
+    
+    repeat(2){
+        Poner(color)
+        Mover(Este)
+    }
+    Poner(color) // caso borde
+    repeat(2){
+        Mover(Oeste)
+    }
+    
+}    

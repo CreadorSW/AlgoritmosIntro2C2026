@@ -1,0 +1,69 @@
+program{
+    // return(hayBolitas(Rojo))
+    // SacarUnaFicha_SiSePuede(Rojo)
+    // Poner_Si_(Rojo, nroBolitas(Rojo) == 2)
+    LimpiarConWhileCeldaDeBolitasDeColor_(Rojo)
+}
+
+procedure SacarUnaFicha_SiSePuede(colorDeLaFicha){
+    /*
+    PROPÓSITO: Saca una ficha de color *colorDeLaFicha* en la celda actual siempre que haya al menos una ficha. Si no, no hace nada.
+    PRECONDICIÓN: Ninguna.
+    PARÁMETROS:
+        - colorDeLaFicha. Color. El color de la ficha a sacar.
+    */
+    
+    if (hayBolitas(colorDeLaFicha)) {
+        Sacar(colorDeLaFicha)
+    }
+    
+}
+
+// chanchitoFeliz =  3 <--- un igual es asignación
+// chanchitoFeliz == 3 <--- True. Dos iguales es comparación. 
+// Poner_Si_(color, condicion)
+
+//hardcodeo
+//Booleano:  Algo que da True o False
+procedure Poner_Si_(color, condicion){
+    /*
+    PROPÓSITO: Pone una bolita de color *color* cuando se cumpla *condicion*. Si no, no hace nada.
+    PRECONDICIÓN: Ninguna.
+    PARÁMETROS:
+        color. Color. El color de la bolita a poner.
+        condicion. Booleano. La condición a cumplir.
+    */
+    
+    if (condicion) {
+        Poner(color)
+    }
+    
+    
+}
+
+procedure LimpiarConWhileCeldaDeBolitasDeColor_(color){
+    /*
+    PROPÓSITO: Retira todas las bolitas de color *color* de la celda actual. Y si no hay no hace nada.
+    PRECONDICIONES: Ninguna.
+    PARÁMETROS:
+        -color. Color. El color de las bolitas a retirar.
+    */
+    
+    while (hayBolitas(color)){
+        Sacar(color)
+    }
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+

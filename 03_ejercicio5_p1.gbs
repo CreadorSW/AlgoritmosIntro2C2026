@@ -1,0 +1,93 @@
+program{
+    DibujarCuadradoRojoDeLado3DesdeElCentro()
+}
+
+
+procedure DibujarCuadradoRojoDeLado3DesdeElCentro(){
+
+    /*
+    PROPÓSITO: Dibuja un cuadradoOeste de lado 3 con bolitas rojas dejando el cabezal en la posición original comenzando en el centro y dejando el cabezal en la posición original.
+    PRECONDICIONES:  Debe haber al menos una celda adyacente al cabezal en cada una de las direcciones cardinales.
+    */
+    
+    IrALaEsquinaSO() // subtareas
+    DibujarCuadradoRojoDeLado3() // subtareas
+    IrAlCentro() // subtareas
+
+}
+
+procedure DibujarCuadradoRojoDeLado3(){
+
+    /*
+    PROPÓSITO: Dibuja un cuadrado de lado 3 con bolitas rojas dejando elOeste cabezal en la posición original comenzando en el centro y dejando el cabezal en la posición original.
+    PRECONDICIONES:  Debe haber al menos 2 celdas al Norte del cabezal y 2 celdas al Este.
+    */
+    
+    repeat(2){
+        DibujarFilaRojaDeLado3()
+        Mover(Norte)
+    }
+    DibujarFilaRojaDeLado3()//caso borde
+    
+    VolverAlInicio()
+
+}
+
+
+
+
+
+
+procedure DibujarFilaRojaDeLado3(){
+    
+    /*
+    PROPÓSITO: Dibuja una fila de bolitas Rojas de longitud 3 de Oeste a Este dejando el cabezal en la posición original.
+    PRECONDICIONES: Debe haber al menos 2 celdas al Este del cabezal.
+    */
+    
+    repeat(2){
+        Poner(Rojo)
+        Mover(Este)
+    }
+    Poner(Rojo) // caso borde
+    repeat(2){
+        Mover(Oeste)
+    }
+    
+}    
+
+procedure VolverAlInicio(){
+    /*
+    PROPÓSITO: Devolver el cabezal a la esquina SO del cuadrado.
+    PRECONDICION: Se tiene que poder ejecutar DibujarFilaRojaDeLado3.
+    */
+    
+    repeat(2){
+        Mover(Sur)
+    }
+    
+}
+
+procedure IrALaEsquinaSO(){
+    /*
+    PROPÓSITO: Posiciona el cabezal en la esquina SO adyacente con respecto a la posición actual.
+    PRECONDICIONES: Debe existir al menos una celda al Oeste y al Sur de la posición actual. 
+    */
+    Mover(Oeste)
+    Mover(Sur)
+    
+}
+
+procedure IrAlCentro(){
+    /*
+    PROPÓSITO: Posiciona el cabezal en la esquina SO adyacente con respecto a la posición actual.
+    PRECONDICIONES: Debe existir al menos una celda al Oeste y al Sur de la posición actual. 
+    */
+    Mover(Norte)
+    Mover(Este)
+}
+
+
+
+
+

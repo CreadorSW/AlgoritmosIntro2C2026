@@ -1,0 +1,18 @@
+program{
+    Poner_DeColor_(8, Negro)
+}
+
+
+procedure Poner_DeColor_(cantidadAPoner, colorAPoner){
+    /*
+    PROPÓSITO: Pone *cantidadAPoner* de bolitas de color *colorAPoner*.
+    PRECONDICIONES: Ninguna. 
+    PARÁMETROS:
+        - cantidadAPoner. Entero positivo. La cantidad de bolitas a poner.
+        - colorAPoner. Color. El color de lasbolitas a poner.
+    */
+    
+    repeat(cantidadAPoner){
+        Poner(colorAPoner)
+    }
+}
