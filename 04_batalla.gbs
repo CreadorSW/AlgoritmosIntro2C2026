@@ -1,0 +1,105 @@
+program{
+    PelearBatalla()
+}
+
+function esCeldaVacia(){
+    /*
+    PROPÓSITO: Indica si la celda actual está vacía.
+    PRECONDICIONES: Ninguna.
+    TIPO: Booleano.
+    */
+    
+    
+    return((not hayBolitas(Rojo)) && (not hayBolitas(Negro)) && (not hayBolitas(Verde)) && (not hayBolitas(Azul)))
+    
+}
+
+
+
+procedure EnviarAliadosParaDuplicarEnemigos(){
+    /*
+    PROPÓSITO: Envía aliados en la celda actual hasta que su cantidad duplique la de enemigos.
+    PRECONDICIONES: Debe haber al menos un enemigo en la celda actual.
+    */
+    
+    repeat (cantidadDeEnemigosAca()*2 - cantidadDeAliadosAca()){
+        EnviarAliado()
+    }
+    /*
+    while(not cantidadDeAliadosAca() == cantidadDeEnemigosAca*2 ){
+    
+        enviarAliado()
+    }
+    */
+}
+
+
+procedure EnviarAliado(){
+    
+    /*
+    PROPÓSITO: Envía un aliado a la celda actual.
+    PRECONDICIONES: Ninguna.
+    */
+    Poner(Negro)
+}
+        
+
+
+function cantidadDeAliadosAca(){
+    /*
+    PROPÓSITO: Indica la cantidad de aliados en la celda actual.
+    TIPO: Número.
+    */
+    return(nroBolitas(Negro))
+}
+
+function cantidadDeEnemigosAca(){
+    /*
+    PROPÓSITO: Indica la cantidad de enemigos en la celda actual.
+    TIPO: Número.
+    */
+    return(nroBolitas(Rojo))
+}
+
+procedure PelearBatalla(){
+    /*
+    PROPÓSITO: Simula una batalla entre aliados y enemigos enfrentando siempre 3 aliados contra 2 enemigos y todos mueren. Esto se repite hasta que haya menos de 2 enemigos y al menos 2 aliados.
+    PRECONDICIONES: Debe haber una cantidad suficiente de aliados para ganar la batalla. Ganar la batalla significa que al final de la misma la cantidad de aliados debe superar por al menos 1 a la de enemigos si dicha cantidad es 1, y por 1 si dicha cantidad es 0.
+    */
+    
+    repeat(cantidadDeEnemigosAca() div 2){
+        Enfrentar3AliadosContra2Enemigos()
+    }
+    
+    
+    
+}
+
+procedure Enfrentar3AliadosContra2Enemigos(){
+    /*
+    PROPÓSITO: Enfrenta 3 aliados contra 2 enemigos y todos mueren.
+    PRECONDICIONES: Debe haber al menos 3 aliados y al menos 2 enemigos.
+    */
+    
+    repeat(3){
+        Sacar(aliado())
+    }
+    repeat(2){
+        Sacar(enemigo())
+    }
+}
+
+
+function aliado(){
+    return(Negro)
+}
+function enemigo(){
+    return(Rojo)
+}
+
+
+
+
+
+
+
