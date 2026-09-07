@@ -1,0 +1,109 @@
+program{
+    CalcularIntensidades()
+}
+
+
+procedure CalcularIntensidades(){
+    /*
+    PROPÓSITO: Dado un display de ecualizador, registra la intensidad de cada
+canal de sonido en la fila cero colocando bolitas azules si la misma es menor o
+igual a 4, y negras en caso contrario, comenzando en la esquina Sur-Oeste y
+desplazándose hacia el Este. Hay 6 canales compuestos por columnas que van desde
+la fila 1 a la 6. El cabezal termina donde se comenzó.
+    PRECONDICIONES: Display de ecualizador ocupando filas 1 a 6 y columnas 0 a
+5. La fila cero debe estar vacía. El cabezal debe encontrarse en la esquina
+Sur-Oeste.
+    */
+
+    repeat(5){
+        RepresentarFrecuenciaActual()
+        Mover(Este)
+    }
+    // caso borde
+    RepresentarFrecuenciaActual()
+    PosicionarCabezalAlInicio()
+
+
+}
+
+procedure RepresentarFrecuenciaActual(){
+       /*
+    PROPÓSITO: Dado un canal de ecualizador, representa su intensidad mediante
+bolitas colocando tantas bolitas como haya en mismo. Si la cantidad es <= 4, se
+colocan bolitas azules, caso contrario, negras.
+    PRECONDICIONES: La celda actual debe encontrarse en la celda adyacente al
+Sur del canal.
+    */
+    if (cantidadDeLucesDelCanal() <= 4){
+        Poner_DeColor_(cantidadDeLucesDelCanal(), Azul)
+    }
+    else{
+        Poner_DeColor_(cantidadDeLucesDelCanal(), Negro)
+    }
+}
+
+
+function cantidadDeLucesDelCanal(){
+
+    /*
+    PROPÓSITO: Indica la cantidad de bolitas que hay en la columna que
+representa el canal.
+    PRECONDICIONES: La celda actual debe encontrarse en la celda adyacente al
+Sur del canal.
+    TIPO: Número.
+
+    */
+
+    cantidadDePasos := 0
+    cantidadDeBolitas := 0
+    while (cantidadDePasos < 6){
+        Mover(Norte)
+        cantidadDeBolitas:= cantidadDeBolitas + contarBolitaAca()
+        cantidadDePasos:= cantidadDePasos +1
+    }
+
+    return(cantidadDeBolitas)
+
+
+}
+
+procedure Poner_DeColor_(unCantidad, color){
+    /*
+    ESTÁ EN LA PRÁCTICA
+    */
+    repeat(unCantidad){
+        Poner(color)
+    }
+}
+
+function contarBolitaAca(){
+    /*
+    PROPÓSITO: Indica 1 o 0 si hay o no alguna luz de led en la celda actual.
+    PRECONDICIONES: Ninguna.
+    TIPO: Número
+
+    */
+
+    return(choose
+        1 when (hayBolitas(Verde) || hayBolitas(Rojo) )
+        0 otherwise
+
+
+    )
+
+
+}
+
+procedure PosicionarCabezalAlInicio(){
+    /*
+    PRECONDICIONES:....
+    */
+    IrAlBorde(Oeste) // cuidado con esto si el ecualizador está flotando en el
+medio del tablero
+}
+
+
+
+
+
+

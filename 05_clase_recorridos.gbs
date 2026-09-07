@@ -1,0 +1,60 @@
+# LAS SUBTAREAS MÁS ÚTILES DE LA HISTORIA
+
+
+procedure IrAPrimeraCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
+    /*
+    Básicamente lleva el cabezal a la esquina opuesta de las 
+    direcciones.
+    PROPÓSITO:  Posiciona el cabezal en la primer celda de un
+    recorrido     al **dirPrincipal** y al **dirSecundaria**
+    PARÁMETROS:
+        *dirPrincipal: Dirección. La dirección principal del
+        recorrido.
+        *dirSecundaria: Dirección. La dirección principal del
+        recorrido.
+    PRECONDICIONES: Las direcciones no deben ser opuestas ni
+    iguales.
+    OBSERVACIONES: la primer celda es la esquina opuesta a
+    **dirPrincipal** y **dirSecundaria**.
+    */
+    IrAlBorde(opuesto(dirPrincipal))
+    IrAlBorde(opuesto(dirSecundaria))
+}
+
+function haySiguienteCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
+    /*
+    PROPÓSITO: Indica si hay una celda al **dirPrincipal** o al
+    **dirSecundaria**
+    PARÁMETROS:
+        *dirPrincipal: Dirección. La dirección principal de
+        l recorrido.
+        *dirSecundaria: Dirección. La dirección principal del
+        recorrido.
+    PRECONDICIONES:Las direcciones no deben ser opuestas ni
+    iguales.
+    TIPO: Booleano.
+    */
+    return(puedeMover(dirPrincipal) || puedeMover(dirSecundaria))
+}
+
+procedure IrASiguienteCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
+    /*
+    PROPÓSITO: Ir a la siguiente celda de un recorrido
+    al **dirPrincipal** y al **dirSecundaria**
+    PARÁMETROS:
+        *dirPrincipal: Dirección. La dirección principal del
+        recorrido.
+        *dirSecundaria: Dirección. La dirección principal del
+        recorrido.
+    PRECONDICIONES: 
+        * Las direcciones no deben ser opuestas ni iguales.
+        * Debe haber al menos una celda en la dirección
+        **dirPrincipal** o  **dirSecundaria**
+    */
+    if (puedeMover(dirPrincipal)){
+        Mover(dirPrincipal)
+    }else{
+        IrAlBorde(opuesto(dirPrincipal))
+        Mover(dirSecundaria)
+    }
+}
