@@ -1,0 +1,23 @@
+
+
+// Este es el procedimiento planteado en clase
+procedure RecorrerTablero(dirPrincipal, dirSecundaria){
+    /*
+
+    */
+
+
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria)
+    while (haySiguienteCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria)){
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria)
+    }
+}
+
+procedure IrHastaLaQueTengaUnaDeCada(){
+
+/*
+
+
+*/
+
+}
