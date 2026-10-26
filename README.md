@@ -3,4 +3,4 @@
 #### Este es el repositorio de la materia. Aquí encontrarán el material que utilizamos en la materia además de la bitácora de clase. 
 #### Recordar que en la bitácora encontrarán *TRABAJO AUTÓNOMO*.
 
-Última actualización pública: 26-10-2026 19:36:48 zona horaria UTC-03:00
+Última actualización pública: 26-10-2026 20:51:14 zona horaria UTC-03:00
